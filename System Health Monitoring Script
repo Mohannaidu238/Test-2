@@ -1,0 +1,40 @@
+import psutil
+
+# Define thresholds
+THRESHOLD_CPU = 80  # Percentage
+THRESHOLD_MEMORY = 80  # Percentage
+THRESHOLD_DISK = 80  # Percentage
+
+# Function to check CPU usage
+def check_cpu_usage():
+    cpu_usage = psutil.cpu_percent(interval=1)
+    if cpu_usage > THRESHOLD_CPU:
+        print(f"CPU usage is {cpu_usage}%, which exceeds threshold of {THRESHOLD_CPU}%")
+
+# Function to check memory usage
+def check_memory_usage():
+    memory_usage = psutil.virtual_memory().percent
+    if memory_usage > THRESHOLD_MEMORY:
+        print(f"Memory usage is {memory_usage}%, which exceeds threshold of {THRESHOLD_MEMORY}%")
+
+# Function to check disk usage
+def check_disk_usage():
+    disk_usage = psutil.disk_usage('/').percent
+    if disk_usage > THRESHOLD_DISK:
+        print(f"Disk usage is {disk_usage}%, which exceeds threshold of {THRESHOLD_DISK}%")
+
+# Function to check running processes
+def check_running_processes():
+    running_processes = len(psutil.pids())
+    print(f"Number of running processes: {running_processes}")
+
+# Main function to run all checks
+def main():
+    print("System health check:")
+    check_cpu_usage()
+    check_memory_usage()
+    check_disk_usage()
+    check_running_processes()
+
+if __name__ == "__main__":
+    main()
